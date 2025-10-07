@@ -1,5 +1,6 @@
 import { AuthProvider, useAuth } from "./AuthContext";
-import { loginWithGoogle, logout } from "./auth";
+import { loginWithGoogle } from "./auth";
+import Home from "./components/Home";
 import './index.css'
 
 
@@ -14,14 +15,6 @@ function AppContent() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error("Error en logout:", error);
-    }
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-100 to-teal-300">
@@ -31,16 +24,7 @@ function AppContent() {
   }
 
   if (user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-100 to-teal-300">
-        <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center">
-          <h1 className="text-2xl font-bold text-teal-900 mb-2">Hola, {user.displayName} 👋</h1>
-          <button className="mt-4 px-6 py-2 bg-teal-600 rounded-lg text-white font-semibold hover:bg-teal-700 transition-all duration-200 shadow" onClick={handleLogout}>
-            Cerrar sesión
-          </button>
-        </div>
-      </div>
-    );
+    return <Home />;
   }
 
   return (
